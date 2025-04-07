@@ -21,7 +21,8 @@
 // private
 // view & pure functions
 
-// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.19;
 
 import {ERC20Burnable , ERC20 } from "lib/openzepplin-contracts/contracts/token/ERC20/extensions/ERC20Burnable.sol";
@@ -75,12 +76,4 @@ contract DecentralizedStableCoin is ERC20Burnable, Ownable {
         _mint(_to, _amount);
         return true;
     }
-
-
-
-
-
-
-
-
 }

@@ -11,10 +11,10 @@ import {HelperConfig} from "script/HelperConfig.s.sol";
 
 
 contract DeployDSC is Script {
-    address[] public tokenAddress;
-    address[] public priceFeedAddress;
+    address[] public tokenAddresses;
+    address[] public priceFeedAddresses;
     function run() external returns(DecentralizedStableCoin, DSCEngine, HelperConfig) {
-        HelperConfig helperConfig = new helperConfig();
+        HelperConfig helperConfig = new HelperConfig();
 
         (address wethUsdPriceFeed, address wbtcUsdPriceFeed , address weth , address wbtc, uint256 deployerkey) =
         helperConfig.activeNetworkConfig();
@@ -24,9 +24,9 @@ contract DeployDSC is Script {
 
         vm.startBroadcast(deployerkey);
         DecentralizedStableCoin dsc = new DecentralizedStableCoin();
-        DSCEngine dscEngine = new DSCEngine(tokenAddress , priceFeedAddess , address(dsc));
+        DSCEngine dscEngine = new DSCEngine(tokenAddresses , priceFeedAddresses , address(dsc));
         dsc.transferOwnership(address(dscEngine));
-        vm.startBroadcast();
+        vm.stopBroadcast();
         return (dsc,dscEngine , helperConfig);
 
     }
